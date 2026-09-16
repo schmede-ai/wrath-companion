@@ -1,0 +1,542 @@
+/* ============================================================
+   Schmede — Wrath Codex Design System
+   Core tokens: color + type
+   
+   Fonts are SELF-HOSTED by this build (see @font-face below).
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+   ============================================================ */
+
+:root {
+  /* ——— PALETTE ———
+     The codex is dual-mode: light "vellum" pages for reading,
+     dark "plate" pages for cinematic imagery.
+     Accents are gold (gilt), rubric red, and a deep-shadow black. */
+
+  /* Inks (foreground on vellum) */
+  --ink:           #181410;   /* body text on vellum */
+  --ink-soft:      #3a3027;   /* secondary text, folios, captions */
+  --ink-quiet:     #6b5d4a;   /* tertiary, dotted leaders */
+
+  /* Vellum (light page backgrounds) */
+  --vellum:        #f3ead7;   /* primary page */
+  --vellum-edge:   #e4d7b7;   /* inset shadow tone */
+  --vellum-warm:   #d8cbac;   /* placard backgrounds */
+
+  /* Shadow (dark page / plate backgrounds) */
+  --shadow:        #120e08;   /* plate page bg, darkest */
+  --shadow-soft:   #1a150f;   /* html bg */
+  --shadow-warm:   #261a14;   /* fallen placard */
+  --shadow-ink:    #2a2016;   /* print bar, elevated dark surfaces */
+
+  /* Light-on-dark text (for plate/shadow surfaces) */
+  --vellum-text:   #d8c9a8;   /* body text on dark */
+  --vellum-muted:  #9a8968;   /* captions / folios on dark */
+  --vellum-high:   #e8d9b8;   /* high-contrast text on dark */
+
+  /* Accents */
+  --rubric:        #7a1818;   /* primary accent: scripture cites, rubrics, drop caps */
+  --rubric-soft:   #9a2a2a;   /* hover / secondary rubric */
+  --rubric-deep:   #5a0e0e;   /* pressed / oxblood */
+  --gilt:          #a07a24;   /* rule lines, ornaments, dividers */
+  --gilt-bright:   #d9b56a;   /* gold on dark, CTA highlights */
+  --gilt-glow:     #f0cc80;   /* hover on gilt */
+  --gilt-dim:      #e8c274;   /* plate-page caption labels */
+
+  /* Semantic named colors */
+  --bg:            var(--vellum);
+  --bg-dark:       var(--shadow);
+  --fg:            var(--ink);
+  --fg-muted:      var(--ink-soft);
+  --fg-on-dark:    var(--vellum-text);
+  --accent:        var(--rubric);
+  --accent-warm:   var(--gilt);
+  --border:        rgba(0,0,0,0.15);
+  --border-dark:   rgba(0,0,0,0.6);
+  --border-gilt:   var(--gilt);
+
+  /* ——— TYPEFACES ———
+     All three are Google Fonts. EB Garamond carries body.
+     Cormorant Garamond carries display italic (captions, pull-quotes).
+     Cinzel carries display caps (chapter heads, title marks). */
+
+  --font-serif:    "EB Garamond", "Cormorant Garamond", Garamond, "Adobe Garamond Pro", "Goudy Old Style", Georgia, serif;
+  --font-display:  "Cormorant Garamond", "EB Garamond", Garamond, serif;
+  --font-caps:     "Cinzel", "Trajan Pro", "EB Garamond", Garamond, serif;
+
+  /* legacy aliases matching the codex */
+  --serif:         var(--font-serif);
+  --display:       var(--font-display);
+  --fraktur:       var(--font-caps);
+
+  /* ——— TYPE SCALE ———
+     Print roots at 11.5pt. For web we scale to a 19px (1.1875rem) body. */
+  --fs-body:       1.0625rem;   /* 17px — body on screen */
+  --fs-small:      0.875rem;    /* 14px — folios, captions */
+  --fs-micro:      0.75rem;     /* 12px — smallcaps labels */
+  --fs-lead:       1.25rem;     /* 20px — lede / pull quotes */
+  --fs-h3:         1.0625rem;   /* subsection (smallcaps) */
+  --fs-h2:         1.25rem;     /* section (smallcaps) */
+  --fs-h1:         2.75rem;     /* chapter title */
+  --fs-display:    4.5rem;      /* cover / title-page hero */
+
+  --lh-tight:      1.08;
+  --lh-head:       1.15;
+  --lh-body:       1.55;
+  --lh-loose:      1.7;
+
+  --ls-caps:       0.18em;      /* small-caps labels */
+  --ls-caps-wide:  0.32em;      /* vol / imprint */
+  --ls-title:      0.08em;      /* chapter/title h1 */
+  --ls-ornament:   0.6em;       /* † † † dividers */
+
+  /* ——— SPACING ———
+     The codex thinks in inches for print; on screen we scale to ems of body. */
+  --sp-0:   0;
+  --sp-1:   0.25rem;
+  --sp-2:   0.5rem;
+  --sp-3:   0.75rem;
+  --sp-4:   1rem;
+  --sp-5:   1.5rem;
+  --sp-6:   2rem;
+  --sp-8:   3rem;
+  --sp-10:  4rem;
+  --sp-12:  6rem;
+  --sp-16:  9rem;   /* page padding on wide layouts */
+
+  /* ——— BORDERS / RULES ——— */
+  --rule-hair:     1px solid var(--border);
+  --rule-gilt:     1px solid var(--gilt);
+  --rule-rubric:   2px solid var(--rubric);
+  --rule-dotted:   1px dotted var(--ink-quiet);
+
+  /* Radii — the codex is nearly square-cornered. 2px max. */
+  --radius-sharp:  0;
+  --radius-soft:   2px;
+
+  /* ——— SHADOWS ———
+     Pages on screen get a heavy drop-shadow (the book is set on a dark table). */
+  --shadow-page:   0 0 0 1px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.55), inset 0 0 60px rgba(120,80,30,0.08);
+  --shadow-plate:  0 4px 24px rgba(0,0,0,0.8);
+  --shadow-soft-lift: 0 2px 8px rgba(0,0,0,0.25);
+  --shadow-inset-warm: inset 0 0 60px rgba(120,80,30,0.08);
+
+  /* ——— BACKGROUNDS ———
+     Vellum has three warm radial glows that simulate parchment age. */
+  --bg-vellum-texture:
+    radial-gradient(ellipse at 20% 30%, rgba(120,80,30,0.05), transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(120,80,30,0.06), transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.4), transparent 70%);
+
+  --bg-vellum-edge:
+    radial-gradient(ellipse 70% 100% at 0% 50%, rgba(80,50,20,0.08), transparent 50%),
+    radial-gradient(ellipse 70% 100% at 100% 50%, rgba(80,50,20,0.08), transparent 50%);
+
+  --bg-placard-light:
+    radial-gradient(ellipse at 30% 30%, rgba(0,0,0,0.08), transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(0,0,0,0.10), transparent 60%);
+
+  --bg-placard-fallen:
+    radial-gradient(ellipse at 30% 30%, rgba(0,0,0,0.35), transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(120,20,20,0.20), transparent 60%);
+}
+
+/* ============================================================
+   SEMANTIC BASE ELEMENTS
+   Apply on top of :root. Use on documents that want codex voice.
+   ============================================================ */
+
+body.codex {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--vellum);
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "onum", "liga", "kern";
+  -webkit-font-smoothing: antialiased;
+}
+body.codex.dark {
+  background: var(--shadow);
+  color: var(--vellum-text);
+}
+
+/* Prose */
+.codex p { margin: 0; text-indent: 1.2em; text-align: justify; hyphens: auto; orphans: 2; widows: 2; }
+.codex p + p { margin-top: 0; }
+.codex p.first,
+.codex p.no-indent { text-indent: 0; }
+.codex p.first::first-line { font-variant: small-caps; letter-spacing: 0.04em; }
+
+/* Drop cap — a signature move. Rubric red, display family. */
+.codex .dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 4.2em;
+  line-height: 0.86;
+  float: left;
+  padding: 0.05em 0.08em 0 0;
+  margin-right: 0.04em;
+  color: var(--rubric);
+}
+
+/* Headings */
+.codex h1 {
+  font-family: var(--font-caps);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-head);
+  letter-spacing: var(--ls-title);
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 0.3em;
+}
+.codex h2.section {
+  font-variant: small-caps;
+  letter-spacing: var(--ls-caps);
+  font-size: var(--fs-h2);
+  text-align: center;
+  color: var(--ink);
+  margin: 1.8em 0 0.8em;
+  font-weight: 500;
+}
+.codex h3.subsection {
+  font-variant: small-caps;
+  letter-spacing: 0.14em;
+  font-size: var(--fs-h3);
+  color: var(--rubric);
+  text-align: left;
+  margin: 1.4em 0 0.2em;
+  font-weight: 500;
+}
+
+/* Utility type */
+.smallcaps { font-variant: small-caps; letter-spacing: 0.06em; }
+.allcaps   { text-transform: uppercase; letter-spacing: 0.12em; }
+.rubric    { color: var(--rubric); }
+.gilt      { color: var(--gilt); }
+.italic    { font-style: italic; font-family: var(--font-display); }
+
+/* Inline emphasis */
+.codex em, .codex i { font-style: italic; }
+.codex strong, .codex b { font-weight: 600; }
+
+/* Latin blockquote — rubric cite, gilt left-rule */
+.codex blockquote.latin {
+  margin: 1.1em 0.3in;
+  padding: 0.2em 0 0.2em 0.8em;
+  border-left: 2px solid var(--gilt);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05em;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.codex blockquote.latin .cite {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-variant: small-caps;
+  font-size: 0.78em;
+  letter-spacing: 0.14em;
+  color: var(--rubric);
+  margin-top: 0.3em;
+}
+
+/* Ornaments */
+.dinkus { text-align: center; color: var(--gilt); letter-spacing: var(--ls-ornament); margin: 1.1em 0 0.9em; font-size: 1em; }
+.dinkus::before { content: "† † †"; }
+.tau { font-family: var(--font-display); color: var(--rubric); letter-spacing: 0.5em; }
+
+/* Folio / runhead */
+.folio, .runhead {
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+
+﻿/* ============================================================
+   WRATH Companion â€” site styles
+   Built on design_system/colors_and_type.css (concatenated above by build.py)
+   and on the cw-* component vocabulary from design_system/ui_kits/codex-web.
+   Nothing here redefines a colour or a typeface; those are tokens.
+
+   The site is ONE continuous document: sections stack, the sidebar is anchor
+   navigation with scroll-spy, and on small screens the sidebar becomes a drawer.
+   ============================================================ */
+
+/* â€”â€”â€” SELF-HOSTED FACES (no Google Fonts request) â€”â€”â€” */
+@font-face { font-family:"Cinzel"; src:url("../fonts/Cinzel-Regular.ttf") format("truetype"); font-weight:400; font-display:swap; }
+@font-face { font-family:"Cinzel"; src:url("../fonts/Cinzel-Bold.ttf") format("truetype"); font-weight:700; font-display:swap; }
+@font-face { font-family:"EB Garamond"; src:url("../fonts/EBGaramond-Regular.ttf") format("truetype"); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:"EB Garamond"; src:url("../fonts/EBGaramond-Italic.ttf") format("truetype"); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:"Cormorant Garamond"; src:url("../fonts/CormorantGaramond.ttf") format("truetype"); font-weight:400; font-display:swap; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+html, body { margin:0; padding:0; }
+body.codex { background: var(--shadow-soft); color: var(--ink); min-height:100vh; overflow-x:hidden; }
+body.wc-locked { overflow:hidden; }
+
+.wc-skip { position:absolute; left:-9999px; top:0; z-index:200; background:var(--shadow-ink);
+  color:var(--gilt-bright); padding:10px 16px; font-variant:small-caps; letter-spacing:.16em; }
+.wc-skip:focus { left:8px; top:8px; }
+
+/* â€”â€”â€” SHELL â€”â€”â€” */
+.cw-shell { display:grid; grid-template-columns:300px 1fr; min-height:100vh; background:var(--shadow-soft); }
+
+/* â€”â€”â€” TOP BAR â€”â€”â€” */
+.cw-topbar { position:sticky; top:0; z-index:40; grid-column:1/-1; background:var(--shadow-ink);
+  border-bottom:1px solid rgba(0,0,0,.6); color:var(--vellum-text);
+  padding-top:env(safe-area-inset-top); }
+.cw-topbar-inner { display:grid; grid-template-columns:300px 1fr; align-items:center;
+  padding:0 28px 0 0; gap:20px; min-height:47px; }
+.cw-volume { font-family:var(--font-caps); font-weight:600; font-size:12px; letter-spacing:.22em;
+  color:var(--gilt-bright); text-transform:uppercase; padding-left:28px; }
+.cw-chapter-runhead { font-variant:small-caps; letter-spacing:.22em; font-size:12px;
+  color:var(--vellum-muted); text-align:center; }
+.wc-navtoggle { display:none; align-items:center; gap:9px; background:none; border:none;
+  color:var(--gilt-bright); cursor:pointer; padding:12px 14px; font:inherit; }
+.wc-burger { display:block; width:17px; height:11px; position:relative; }
+.wc-burger::before, .wc-burger::after, .wc-burger { border-top:1.5px solid currentColor; }
+.wc-burger::before, .wc-burger::after { content:""; position:absolute; left:0; right:0; }
+.wc-burger::before { top:4px; } .wc-burger::after { top:9px; }
+.wc-navtoggle-text { font-variant:small-caps; letter-spacing:.18em; font-size:11.5px; }
+
+/* â€”â€”â€” SIDEBAR â€”â€”â€” */
+.wc-scrim { position:fixed; inset:0; z-index:35; background:rgba(8,5,3,.6); }
+.cw-nav { position:sticky; top:47px; align-self:start; height:calc(100vh - 47px); background:var(--shadow);
+  border-right:1px solid rgba(0,0,0,.6); color:var(--vellum-text); padding:28px 22px 32px;
+  overflow-y:auto; overscroll-behavior:contain; }
+.cw-nav::-webkit-scrollbar { width:8px; }
+.cw-nav::-webkit-scrollbar-thumb { background:rgba(160,122,36,.28); }
+.cw-nav-head { display:flex; align-items:center; gap:13px; margin-bottom:16px; }
+.cw-tau { font-family:var(--font-caps); font-size:26px; color:var(--rubric-soft); }
+.cw-nav-title { font-family:var(--font-caps); font-weight:700; font-size:21px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--vellum-high); line-height:1; }
+.cw-nav-sub { font-family:var(--font-display); font-style:italic; font-size:13px; color:var(--vellum-muted); margin-top:3px; }
+.cw-nav-rule { height:1px; background:var(--gilt); opacity:.45; margin:14px 0; }
+.cw-nav-rule--bot { margin-top:22px; }
+
+.wc-nav-group { margin-bottom:18px; }
+.cw-nav-label { font-variant:small-caps; letter-spacing:.26em; font-size:10px; color:var(--gilt-bright); margin-bottom:7px; }
+.cw-nav-list { list-style:none; padding:0; margin:0; }
+.cw-nav-item { display:grid; grid-template-columns:26px 1fr; align-items:baseline; padding:5px 0;
+  font-size:13.5px; color:var(--vellum-text); text-decoration:none; transition:color .15s linear; }
+.cw-nav-item:hover, .cw-nav-item:focus-visible { color:var(--gilt-bright); }
+.cw-nav-item.is-active { color:var(--gilt-bright); }
+.cw-nav-item.is-active .cw-nav-roman { color:var(--rubric-soft); }
+.cw-nav-roman { font-variant:small-caps; letter-spacing:.08em; color:var(--vellum-muted); font-size:11px; }
+.cw-nav-text { font-variant:small-caps; letter-spacing:.09em; line-height:1.32; }
+.wc-nav-note { font-family:var(--font-display); font-style:italic; font-size:11.5px; line-height:1.5;
+  color:var(--vellum-muted); opacity:.75; text-align:center; }
+
+/* â€”â€”â€” READING COLUMN â€”â€”â€”
+   min-width:0 is load-bearing. A grid item defaults to min-width:auto, so a single wide
+   descendant â€” a <pre> of broadcast text, a long table â€” expands the whole column past the
+   viewport and pushes the page sideways. These three declarations are what keep it in. */
+.cw-main { background:var(--shadow-soft); padding:34px 24px 90px; display:flex; justify-content:center;
+  min-width:0; }
+.cw-reader { width:100%; max-width:780px; min-width:0; background:var(--vellum);
+  background-image:var(--bg-vellum-texture); box-shadow:var(--shadow-page);
+  padding:56px 76px 64px; position:relative; overflow-wrap:break-word; }
+.wc-sec, .wc-tablewrap { min-width:0; }
+
+/* Sections stack in one document; the opener is the chapter break. */
+.wc-sec { scroll-margin-top:64px; }
+.wc-sec + .wc-sec { margin-top:78px; padding-top:56px; border-top:1px solid rgba(0,0,0,.10); }
+
+/* Part break â€” a divider when the whole section group changes */
+.wc-partbreak { margin:104px -30px 0; padding:34px 30px 0; border-top:1px solid var(--gilt);
+  text-align:center; }
+.wc-partbreak + .wc-sec { margin-top:0; padding-top:0; border-top:none; }
+.wc-partbreak span { font-family:var(--font-caps); font-weight:700; font-size:15px; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--gilt); }
+
+/* Opener
+   NOTE: these are scoped under .cw-reader on purpose. The design-system token file ships
+   `.codex h1 { font-size: var(--fs-h1) }` â€” specificity (0,1,1) â€” which silently beat a bare
+   `.cw-chapter-title` (0,1,0) and pinned every chapter title to 44px at every breakpoint.
+   Same reason the prose selectors below are scoped rather than bare element selectors. */
+.cw-chapter-opener { text-align:center; margin-bottom:40px; }
+.cw-chapter-num { font-variant:small-caps; letter-spacing:.4em; font-size:11px; color:var(--rubric); margin-bottom:18px; }
+.cw-reader .cw-chapter-title { font-family:var(--font-caps); font-weight:700; font-size:38px;
+  line-height:1.12; letter-spacing:.07em; text-transform:uppercase; color:var(--ink); margin:0 0 16px; }
+.wc-subtitle { font-family:var(--font-display); font-style:italic; font-size:16px; color:var(--ink-soft); margin-bottom:14px; }
+.cw-chapter-scripture { font-family:var(--font-display); font-style:italic; font-size:17px; line-height:1.45;
+  max-width:460px; margin:0 auto 8px; color:var(--ink-soft); }
+.cw-chapter-cite { font-variant:small-caps; letter-spacing:.18em; font-size:11px; color:var(--rubric); }
+.cw-chapter-orn { color:var(--gilt); font-size:14px; letter-spacing:.8em; margin-top:24px; }
+
+/* Prose */
+.cw-reader p { margin:0; text-indent:1.2em; text-align:justify; hyphens:auto; orphans:2; widows:2;
+  font-size:17px; line-height:1.62; color:var(--ink); }
+.cw-reader p + p { margin-top:0; }
+.cw-reader h2 + p, .cw-reader h3 + p, .cw-reader h4 + p,
+.cw-reader hr + p, .cw-reader figure + p, .cw-reader .wc-tablewrap + p,
+.cw-reader ul + p, .cw-reader ol + p, .cw-reader blockquote + p,
+.cw-reader .cw-chapter-opener + p, .cw-reader .wc-yt-grid + p,
+.cw-reader pre + p { text-indent:0; margin-top:14px; }
+.cw-reader a { color:var(--rubric); text-decoration:none; border-bottom:1px solid rgba(122,24,24,.3); }
+.cw-reader a:hover { color:var(--rubric-soft); border-bottom-color:var(--rubric-soft); }
+.cw-reader strong { font-weight:600; }
+
+.cw-reader h2 { font-variant:small-caps; letter-spacing:.2em; font-size:16px; text-align:center;
+  color:var(--ink); margin:42px 0 4px; font-weight:500; font-family:var(--font-serif); }
+.cw-reader h2::after { content:""; display:block; width:56px; height:1px; background:var(--gilt);
+  opacity:.6; margin:12px auto 0; }
+.cw-reader h3 { font-variant:small-caps; letter-spacing:.13em; font-size:14px; color:var(--rubric);
+  margin:28px 0 2px; font-weight:500; font-family:var(--font-serif); }
+.cw-reader h4 { font-variant:small-caps; letter-spacing:.1em; font-size:12.5px; color:var(--ink-soft);
+  margin:20px 0 2px; font-weight:600; font-family:var(--font-serif); }
+
+.cw-reader ul, .cw-reader ol { margin:12px 0; padding-left:1.5em; font-size:16.5px; line-height:1.58; }
+.cw-reader li { margin:5px 0; }
+
+.cw-reader hr { border:none; text-align:center; margin:30px 0; }
+/* Dinkus. U+204A (tironian et) renders as "7" in EB Garamond â€” use the dagger, which the
+   face carries and which matches the footer seal. */
+.cw-reader hr::before { content:"\2020 \2020 \2020"; color:var(--gilt); letter-spacing:.55em; font-size:12px; }
+
+/* Latin / pull block */
+.cw-reader blockquote { margin:20px 18px; padding:2px 0 2px 16px; border-left:2px solid var(--gilt);
+  font-family:var(--font-display); font-style:italic; font-size:16.5px; line-height:1.5; color:var(--ink-soft); }
+.cw-reader blockquote p { text-indent:0 !important; text-align:left; font-size:inherit; font-family:inherit;
+  font-style:inherit; line-height:inherit; color:inherit; }
+
+/* Verbatim blocks â€” the broadcast texts */
+.cw-reader pre { background:rgba(0,0,0,.045); border-left:2px solid var(--ink-quiet); padding:16px 18px;
+  overflow-x:auto; font-size:12.5px; line-height:1.55; margin:22px 0; }
+.cw-reader pre code { font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace; color:var(--ink-soft); }
+.cw-reader code { font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace; font-size:.88em; }
+
+/* Tables â€” wrap in every cell, break out slightly wider than the text, scroll as a last resort */
+.wc-tablewrap { margin:22px -22px; padding:0 22px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.cw-reader table { width:100%; border-collapse:collapse; margin:0; font-size:14.5px; line-height:1.45; table-layout:auto; }
+.cw-reader thead th { font-variant:small-caps; letter-spacing:.14em; font-size:11.5px; color:var(--rubric);
+  text-align:left; padding:0 10px 7px; border-bottom:1px solid var(--gilt); font-weight:500; vertical-align:bottom; }
+.cw-reader tbody td { padding:8px 10px; border-bottom:1px solid rgba(0,0,0,.09); vertical-align:top; color:var(--ink); }
+.cw-reader tbody tr:last-child td { border-bottom:none; }
+/* Never nowrap: a long Vulgate dispatch line will push the table off the page. */
+.cw-reader thead th, .cw-reader tbody td { overflow-wrap:break-word; word-break:normal; hyphens:none; }
+.cw-reader tbody td:first-child { font-family:var(--font-display); font-style:italic; color:var(--ink); }
+.cw-reader table.wc-t2 td:first-child, table.wc-t2 th:first-child { width:38%; }
+
+/* Plates */
+.cw-plate { margin:34px -18px; cursor:zoom-in; }
+.cw-plate-frame { background:var(--shadow); padding:18px; box-shadow:var(--shadow-plate); }
+.cw-plate-frame img { display:block; width:100%; height:auto; filter:saturate(.92) contrast(1.02);
+  box-shadow:0 2px 8px rgba(0,0,0,.5); }
+.cw-plate figcaption { font-family:var(--font-display); font-style:italic; font-size:13px; line-height:1.45;
+  color:var(--ink-soft); margin-top:12px; padding:0 4px; }
+.cw-plate-label { font-family:var(--font-serif); font-style:normal; font-variant:small-caps;
+  letter-spacing:.16em; color:var(--rubric); margin-right:10px; font-size:11px; }
+
+/* YouTube tiles */
+.wc-yt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(208px,1fr)); gap:20px; margin:26px 0; }
+.wc-yt { cursor:pointer; }
+.wc-yt-thumb { position:relative; aspect-ratio:16/9; background-size:cover; background-position:center;
+  background-color:var(--shadow); box-shadow:var(--shadow-plate); display:flex; align-items:center; justify-content:center; }
+.wc-yt-thumb::after { content:""; position:absolute; inset:0; background:rgba(10,7,4,.28); transition:background .18s; }
+.wc-yt:hover .wc-yt-thumb::after, .wc-yt:focus-visible .wc-yt-thumb::after { background:rgba(10,7,4,.05); }
+.wc-yt-play { position:relative; z-index:2; color:var(--vellum-high); font-size:26px; opacity:.9;
+  text-shadow:0 2px 12px rgba(0,0,0,.9); }
+.wc-yt-dur { position:absolute; right:7px; bottom:6px; z-index:2; font-variant:small-caps; letter-spacing:.1em;
+  font-size:10.5px; color:var(--vellum-high); background:rgba(10,7,4,.72); padding:1px 6px; }
+.wc-yt-cap { font-family:var(--font-display); font-style:italic; font-size:13.5px; color:var(--ink-soft);
+  margin-top:9px; line-height:1.35; }
+.wc-yt iframe { width:100%; aspect-ratio:16/9; border:0; box-shadow:var(--shadow-plate); }
+
+/* Sources footer */
+.wc-sources { margin-top:40px; padding-top:15px; border-top:1px solid rgba(0,0,0,.12);
+  font-size:12.5px; line-height:1.55; color:var(--ink-quiet); font-family:var(--font-display);
+  font-style:italic; overflow-wrap:anywhere; }
+.wc-sources-label { font-family:var(--font-serif); font-style:normal; font-variant:small-caps;
+  letter-spacing:.2em; font-size:10.5px; color:var(--rubric); margin-right:9px; }
+
+/* Footer seal */
+.cw-footer { text-align:center; margin-top:64px; }
+.cw-footer-dinkus { color:var(--gilt); letter-spacing:.8em; font-size:13px; margin-bottom:22px; }
+.cw-footer-seal { font-family:var(--font-display); font-style:italic; font-size:21px; color:var(--rubric); }
+
+/* Back to top */
+.wc-top { position:fixed; right:18px; bottom:18px; z-index:45; width:42px; height:42px;
+  background:var(--shadow-ink); color:var(--gilt-bright); border:1px solid rgba(160,122,36,.4);
+  cursor:pointer; font-size:17px; line-height:1; box-shadow:0 4px 16px rgba(0,0,0,.5);
+  margin-bottom:env(safe-area-inset-bottom); }
+.wc-top[hidden] { display:none; }
+
+/* Plate viewer */
+.cw-viewer { position:fixed; inset:0; z-index:100; background:rgba(10,7,4,.96); display:flex;
+  flex-direction:column; align-items:center; justify-content:center; padding:32px; cursor:zoom-out; }
+.cw-viewer[hidden] { display:none; }
+.cw-viewer img { max-width:94vw; max-height:78vh; box-shadow:0 8px 48px rgba(0,0,0,.9); }
+.cw-viewer-cap { font-family:var(--font-display); font-style:italic; font-size:15px; color:var(--vellum-text);
+  max-width:640px; text-align:center; margin-top:20px; }
+.cw-viewer-close { position:absolute; top:14px; right:20px; background:none; border:none;
+  color:var(--gilt-bright); font-size:32px; cursor:pointer; padding:8px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .cw-shell { grid-template-columns:1fr; }
+  .cw-topbar-inner { grid-template-columns:auto 1fr; padding:0 14px 0 0; gap:6px; }
+  .cw-volume { display:none; }
+  .cw-chapter-runhead { text-align:right; font-size:11px; letter-spacing:.18em; }
+
+  .wc-navtoggle { display:inline-flex; }
+
+  .cw-nav { position:fixed; top:0; left:0; bottom:0; width:min(86vw, 330px); height:100dvh; z-index:36;
+    transform:translateX(-100%); transition:transform .24s ease-out; box-shadow:12px 0 40px rgba(0,0,0,.55);
+    padding-top:calc(24px + env(safe-area-inset-top)); }
+  .cw-nav.is-open { transform:translateX(0); }
+
+  .cw-main { padding:0 0 64px; }
+  .cw-reader { max-width:none; padding:32px 20px 44px; box-shadow:none; }
+
+  .wc-sec { scroll-margin-top:56px; }
+  .wc-sec + .wc-sec { margin-top:52px; padding-top:38px; }
+  .wc-partbreak { margin:66px -20px 0; padding:26px 20px 0; }
+  .wc-partbreak span { font-size:12.5px; letter-spacing:.26em; }
+
+  .cw-reader .cw-chapter-title { font-size:27px; letter-spacing:.05em; }
+  .wc-subtitle { font-size:14.5px; }
+  .cw-chapter-scripture { font-size:15px; }
+
+  /* Justified text with hyphenation looks bad in a narrow measure. */
+  .cw-reader p { text-align:left; hyphens:none; font-size:16.5px; line-height:1.6; }
+  .cw-reader ul, .cw-reader ol { font-size:16px; padding-left:1.25em; }
+
+  .cw-reader blockquote { margin:18px 0; }
+  .cw-plate { margin:26px -20px; }
+  .cw-plate-frame { padding:10px; }
+  .wc-tablewrap { margin:20px -20px; padding:0 20px; }
+  .cw-reader table { font-size:13.5px; }
+  .cw-reader pre { font-size:11px; padding:12px 13px; margin:18px -20px; }
+  .wc-yt-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:16px; }
+}
+
+@media (max-width: 480px) {
+  .wc-navtoggle-text { display:none; }
+  .wc-navtoggle { padding:12px; }
+  .cw-chapter-runhead { font-size:10.5px; letter-spacing:.14em; }
+  .cw-reader { padding:26px 16px 38px; }
+  .cw-reader .cw-chapter-title { font-size:23px; }
+  .cw-plate, .wc-tablewrap, .cw-reader pre { margin-left:-16px; margin-right:-16px; }
+  .wc-tablewrap, .cw-reader pre { padding-left:16px; padding-right:16px; }
+  .wc-partbreak { margin-left:-16px; margin-right:-16px; padding-left:16px; padding-right:16px; }
+  .wc-yt-grid { grid-template-columns:1fr 1fr; gap:12px; }
+  .wc-yt-cap { font-size:12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .cw-nav { transition:none; }
+}
